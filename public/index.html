@@ -1,1 +1,50 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.31976bb7.js"></script><link href="/static/css/main.f855e6bc.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>React App</title>
+    <script defer="defer" src="/static/js/main.31976bb7.js"></script>
+    <link href="/static/css/main.f855e6bc.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body><noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <a href='order.html'><button>주문하기</button></a> -->
+    <details>
+        <summary>메뉴</summary>
+        <button onclick="hey()">메뉴 보기</button>
+        <ul id="names-q1"></ul>
+     </details>
+ <form method ="post" action="/menus/order">
+    <p>메뉴 번호 : <input type ="text" name ="menu_id"></p> 
+    <p><button type="submit" >주문하기 </button></p>
+ </form>
+    <script>
+    async function hey() {
+       await fetch('http://localhost:4000/menus/menus').then(res => res.json()).then(data => {
+            $('#names-q1').empty()
+            let rows = data.menu
+            rows.forEach((a) => {
+                let id = a['id']
+                let name = a['name']
+                let type = a['type']
+                let temperature = a['temperature']
+                let price = a['price']
+                console.log(id,name,type,temperature,price)
+                let temp_html = `<li>${id},${name},${type},${temperature},${price}</li>`
+                $('#names-q1').append(temp_html)
+            })
+        })
+    }
+    </script>
+    <div id="root"></div>
+</body>
+
+</html>
